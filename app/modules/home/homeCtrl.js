@@ -46,6 +46,7 @@
 						vm.error = 'the token could not be get';
 					} else if (data.status === 1) {
 						vm.token = data.response.data;
+						vm.getPhotos();
 						console.log(vm.token);
 					}
 
