@@ -57,7 +57,7 @@
 			vm.resetError();
 
 			homeService
-				.getMyPhotos(`https://aureda.heroku.com/images?filter=owned`, vm.token)
+				.getMyPhotos(`https://aureda.herokuapp.com/images?filter=owned`, vm.token)
 				.then((data) => {
 					if (data.status === 0) {
 						vm.error = 'Could not get MY photos';

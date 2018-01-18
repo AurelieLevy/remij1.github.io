@@ -33,10 +33,11 @@
 			}
 
 			vm.getPhotos = function() {
+				console.log("Getting photo with token " + vm.token)
 				vm.resetError();
 
 				shopService
-					.getBuyablePhotos(`https://aureda.heroku.com/images?filter=buyable`, vm.token)
+					.getBuyablePhotos(`https://aureda.herokuapp.com/images?filter=buyable`, vm.token)
 					.then((data) => {
 						if (data.status === 0) {
 							vm.error = 'the data cannot be loaded';
