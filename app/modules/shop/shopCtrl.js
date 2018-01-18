@@ -36,7 +36,7 @@
 				vm.resetError();
 
 				shopService
-					.executeGetRequest(`/app/assets/images/data.json`)
+					.getBuyablePhotos(`/app/assets/images/data.json`)
 					.then((data) => {
 						if (data.status === 0) {
 							vm.error = 'the data cannot be loaded';
