@@ -91,7 +91,7 @@
 				});//*/
 		}
 
-		vm.buy = function(imageId){
+		$scope.buy = function(imageId){
 			shopService.buy(imageId)
 				.then(() =>{
 					$scope.$apply();
