@@ -77,7 +77,7 @@
 					if (data.status === 0) {
 						vm.error = 'Could not get my data';
 					} else if (data.status === 1) {
-						vm.userData = data.response.data;
+						$scope.userData = data.response.data;
 					}
 
 					$scope.$apply();
