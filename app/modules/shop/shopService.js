@@ -29,7 +29,7 @@
 
 
 		function getPhotos(token, filter) {
-			urlString = baseURL + "images?filter=" + filter;
+			let urlString = baseURL + "images?filter=" + filter;
 			return new Promise((resolve) => {
 				console.log(`Fetching ${urlString}...`);
 
