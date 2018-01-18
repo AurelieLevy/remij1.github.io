@@ -40,7 +40,7 @@
 			console.log("Getting token from code " + findGetParameter("code"));
 
 			homeService
-				.postCode(`http://aureda.heroku.com/access_token`, findGetParameter("code"))
+				.postCode(`https://aureda.herokuapp.com/access_token`, findGetParameter("code"))
 				.then((data) => {
 					if (data.status === 0) {
 						vm.error = 'the token could not be get';
