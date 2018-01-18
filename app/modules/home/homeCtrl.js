@@ -37,6 +37,8 @@
 		vm.getToken = function() {
 			vm.resetError();
 
+			console.log("Getting token from code " + findGetParameter("code"));
+
 			homeService
 				.postCode(`https://aureda.heroku.com/access_token`, findGetParameter("code"))
 				.then((data) => {
