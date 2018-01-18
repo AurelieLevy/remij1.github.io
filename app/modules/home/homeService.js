@@ -51,6 +51,7 @@
 		}
 
 		function postCode(urlString, code) {
+			console.log("Posting code to aureda");
 			return new Promise((resolve) => {
 				console.log(`Fetching ${urlString}...`);
 

@@ -26,6 +26,7 @@
 		var vm = this;
 		vm.photos = [];
 		vm.loginLink = "";
+		vm.token = "";
 
 		vm.error = null;
 
@@ -40,9 +41,10 @@
 				.postCode(`https://aureda.heroku.com/access_token`, findGetParameter("code"))
 				.then((data) => {
 					if (data.status === 0) {
-						vm.error = 'the data cannot be loaded';
+						vm.error = 'the token could not be get';
 					} else if (data.status === 1) {
-						vm.photos = data.response.data;
+						vm.token = data.response.data;
+						console.log(vm.token);
 					}
 
 					$scope.$apply();
@@ -56,7 +58,7 @@
 				.getMyPhotos(`https://aureda.heroku.com/images?filter=owned`, vm.token)
 				.then((data) => {
 					if (data.status === 0) {
-						vm.error = 'the data cannot be loaded';
+						vm.error = 'Could not get MY photos';
 					} else if (data.status === 1) {
 						vm.photos = data.response.data;
 					}
@@ -97,7 +99,7 @@
 			return result;
 		}
 
-		vm.token = vm.getToken();
+		console.log(vm.token);
 
 		setLoginLink();
 
