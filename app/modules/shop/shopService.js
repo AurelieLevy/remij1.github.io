@@ -23,8 +23,8 @@
 			postCode: postCode,
 		};
 
-		//const baseURL = "https://aureda.herokuapp.com/";
-		//let token = "";
+		const baseURL = "https://aureda.herokuapp.com/";
+		let token = "";
 
 		function getPhotos(token, filter) {
 			urlString = baseURL + "images?filter=" + filter;
