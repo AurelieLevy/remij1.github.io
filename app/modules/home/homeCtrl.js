@@ -13,7 +13,7 @@
 		.module('home')
 		.controller('HomeCtrl', Home);
 
-	Home.$inject = ['$scope','homeService'];
+	Home.$inject = ['$scope', 'homeService', 'shopService'];
 
 	/*
 	* recommend
@@ -21,7 +21,7 @@
 	* and bindable members up top.
 	*/
 
-	function Home($scope, homeService) {
+	function Home($scope, homeService, shopService) {
 		/*jshint validthis: true */
 		var vm = this;
 		vm.photos = [];
@@ -30,35 +30,33 @@
 
 		vm.error = null;
 
-		vm.resetError = function() {
+		vm.resetError = function () {
 			vm.error = null;
 		}
 
-		vm.getToken = function() {
+		vm.getToken = function () {
 			vm.resetError();
 
 			console.log("Getting token from code " + findGetParameter("code"));
 
-			homeService
-				.postCode(`https://aureda.herokuapp.com/access_token`, findGetParameter("code"))
+			vm.resetError();
+
+			console.log("Getting token from code " + findGetParameter("code"));
+
+			shopService.postCode(findGetParameter("code"))
 				.then((data) => {
-					if (data.status === 0) {
-						vm.error = 'the token could not be get';
-					} else if (data.status === 1) {
-						vm.token = data.response.data;
-						vm.getPhotos();
-						console.log(vm.token);
-					}
+					vm.token = data.response.data;
+					vm.getPhotos();
+					console.log(vm.token);
 
 					$scope.$apply();
 				});
-		}		
+		}
 
-		vm.getPhotos = function() {
+		vm.getPhotos = function () {
 			vm.resetError();
 
-			homeService
-				.getMyPhotos(`https://aureda.herokuapp.com/images?filter=owned`, vm.token)
+			shopService.getMyPhotos()
 				.then((data) => {
 					if (data.status === 0) {
 						vm.error = 'Could not get MY photos';
@@ -73,10 +71,10 @@
 		function makerandom() {
 			var text = "";
 			var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-		
+
 			for (var i = 0; i < 30; i++)
 				text += possible.charAt(Math.floor(Math.random() * possible.length));
-		
+
 			return text;
 		}
 
