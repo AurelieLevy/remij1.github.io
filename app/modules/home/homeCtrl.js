@@ -37,7 +37,7 @@
 			vm.resetError();
 
 			homeService
-				.postCode(`https://aureda.heroku.com/access_token`, vm.code("code"))
+				.postCode(`https://aureda.heroku.com/access_token`, findGetParameter("code"))
 				.then((data) => {
 					if (data.status === 0) {
 						vm.error = 'the data cannot be loaded';
@@ -84,7 +84,7 @@
 		}
 
 		// https://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript
-		vm.code = function findGetParameter(parameterName) {
+		function findGetParameter(parameterName) {
 			var result = null,
 				tmp = [];
 			location.search
@@ -99,7 +99,7 @@
 
 		vm.token = vm.getToken();
 		console.log(vm.getToken());
-		console.log(vm.code("code"));
+		console.log(findGetParameter("code"));
 
 		setLoginLink();
 
