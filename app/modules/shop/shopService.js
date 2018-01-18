@@ -17,14 +17,15 @@
 
 	shopService.$inject = ['$http'];
 
+	const baseURL = "https://aureda.herokuapp.com/";
+	let token = "";
+
 	function shopService($http) {
 		return {
 			getBuyablePhotos: getBuyablePhotos,
 			postCode: postCode,
 		};
 
-		const baseURL = "https://aureda.herokuapp.com/";
-		let token = "";
 
 		function getPhotos(token, filter) {
 			urlString = baseURL + "images?filter=" + filter;
