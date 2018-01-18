@@ -56,7 +56,7 @@
 				console.log(`Fetching ${urlString}...`);
 
 				let body = {
-					"code" : code;
+					"code" : code
 				}
 
 				// Simple GET request example:
