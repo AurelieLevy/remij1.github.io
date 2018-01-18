@@ -25,6 +25,7 @@
 			getBuyablePhotos: getBuyablePhotos,
 			getMyPhotos: getMyPhotos,
 			postCode: postCode,
+			buy:buy
 		};
 
 
