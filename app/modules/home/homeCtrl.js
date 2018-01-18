@@ -98,8 +98,6 @@
 		}
 
 		vm.token = vm.getToken();
-		console.log(vm.getToken());
-		console.log(findGetParameter("code"));
 
 		setLoginLink();
 

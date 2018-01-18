@@ -56,7 +56,7 @@
 
 				// Simple GET request example:
 				$http({
-					method: 'GET',
+					method: 'POST',
 					url: urlString,
 					data: code
 				}).then(function successCallback(response) {

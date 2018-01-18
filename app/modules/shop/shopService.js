@@ -58,7 +58,7 @@
 	
 					// Simple GET request example:
 					$http({
-						method: 'GET',
+						method: 'POST',
 						url: urlString
 					}).then(function successCallback(response) {
 							// this callback will be called asynchronously
