@@ -63,7 +63,7 @@
 				$http({
 					method: 'POST',
 					url: urlString,
-					data: body
+					data: JSON.stringify(body)
 				}).then(function successCallback(response) {
 						// this callback will be called asynchronously
 						// when the response is available
