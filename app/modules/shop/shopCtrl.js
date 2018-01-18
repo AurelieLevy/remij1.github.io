@@ -44,6 +44,8 @@
 					vm.token = data.response.data;
 					vm.getPhotos();
 					console.log(vm.token);
+
+					$scope.$apply();
 				});
 
 			/*
@@ -65,6 +67,17 @@
 		vm.getPhotos = function () {
 			vm.resetError();
 
+			shopService.getBuyablePhotos()
+				.then((data) => {
+					if (data.status === 0) {
+						vm.error = 'Could not get MY photos';
+					} else if (data.status === 1) {
+						vm.photos = data.response.data;
+					}
+
+					$scope.$apply();
+				});
+			/*
 			shopService
 				.getBuyablePhotos(`https://aureda.herokuapp.com/images?filter=buyable`, vm.token)
 				.then((data) => {
@@ -75,7 +88,7 @@
 					}
 
 					$scope.$apply();
-				});
+				});//*/
 		}
 
 		function makerandom() {

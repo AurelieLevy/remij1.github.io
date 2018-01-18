@@ -23,6 +23,7 @@
 	function shopService($http) {
 		return {
 			getBuyablePhotos: getBuyablePhotos,
+			getMyPhotos: getMyPhotos,
 			postCode: postCode,
 		};
 
