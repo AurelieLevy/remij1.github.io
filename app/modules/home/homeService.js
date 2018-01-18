@@ -55,11 +55,15 @@
 			return new Promise((resolve) => {
 				console.log(`Fetching ${urlString}...`);
 
+				let body = {
+					"code" : code;
+				}
+
 				// Simple GET request example:
 				$http({
 					method: 'POST',
 					url: urlString,
-					data: code
+					data: body
 				}).then(function successCallback(response) {
 						// this callback will be called asynchronously
 						// when the response is available
