@@ -23,14 +23,17 @@
 				postCode: postCode,
 			};
 
-			function getBuyablePhotos(urlString) {
+			function getBuyablePhotos(urlString, token) {
 				return new Promise((resolve) => {
 					console.log(`Fetching ${urlString}...`);
 	
 					// Simple GET request example:
 					$http({
 						method: 'GET',
-						url: urlString
+						url: urlString,
+						headers: {
+							'x-access-token': token.access_token
+						}
 					}).then(function successCallback(response) {
 							// this callback will be called asynchronously
 							// when the response is available

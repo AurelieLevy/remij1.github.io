@@ -36,7 +36,7 @@
 				vm.resetError();
 
 				shopService
-					.getBuyablePhotos(`/app/assets/images/data.json`)
+					.getBuyablePhotos(`https://aureda.heroku.com/images?filter=buyable`, vm.token)
 					.then((data) => {
 						if (data.status === 0) {
 							vm.error = 'the data cannot be loaded';
@@ -47,6 +47,22 @@
 						$scope.$apply();
 					});
 			}
+
+			// https://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript
+			vm.code = function findGetParameter(parameterName) {
+				var result = null,
+					tmp = [];
+				location.search
+					.substr(1)
+					.split("&")
+					.forEach(function (item) {
+						tmp = item.split("=");
+						if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+					});
+				return result;
+			}
+
+			vm.token = vm.getToken();
 
 			vm.getPhotos();
 		}
