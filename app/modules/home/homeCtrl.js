@@ -99,6 +99,7 @@
 			return result;
 		}
 
+		vm.getToken();
 		console.log(vm.token);
 
 		setLoginLink();
