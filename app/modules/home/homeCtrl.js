@@ -47,6 +47,7 @@
 				.then((data) => {
 					vm.token = data.response.data;
 					vm.getPhotos();
+					vm.getUserData();
 					console.log(vm.token);
 
 					$scope.$apply();
@@ -62,6 +63,21 @@
 						vm.error = 'Could not get MY photos';
 					} else if (data.status === 1) {
 						vm.photos = data.response.data;
+					}
+
+					$scope.$apply();
+				});
+		}
+
+		vm.getUserData = function(){
+			vm.resetError();
+
+			shopService.getUserData()
+				.then((data) => {
+					if (data.status === 0) {
+						vm.error = 'Could not get my data';
+					} else if (data.status === 1) {
+						vm.userData = data.response.data;
 					}
 
 					$scope.$apply();

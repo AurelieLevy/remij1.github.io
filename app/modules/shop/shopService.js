@@ -25,7 +25,8 @@
 			getBuyablePhotos: getBuyablePhotos,
 			getMyPhotos: getMyPhotos,
 			postCode: postCode,
-			buy:buy
+			buy:buy,
+			getUserData:getUserData
 		};
 
 
@@ -98,6 +99,38 @@
 				});
 			});
 			
+		}
+
+		function getUserData(){
+			let urlString = baseURL + "user_info";
+			
+			return new Promise((resolve) => {
+				console.log(`Fetching ${urlString}...`);
+
+				// Simple GET request example:
+				$http({
+					method: 'GET',
+					url: urlString,
+					headers: {
+						'x-access-token': token
+					}
+				}).then(function successCallback(response) {
+					// this callback will be called asynchronously
+					// when the response is available
+
+					resolve({
+						status: 1,
+						response,
+					});
+				}, function errorCallback(response) {
+					// called asynchronously if an error occurs
+					// or server returns response with an error status.
+					resolve({
+						status: 0,
+						response,
+					});
+				});
+			});
 		}
 
 		function postCode(code) {
