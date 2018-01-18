@@ -1,4 +1,4 @@
-(function() {
+(function () {
 	'use strict';
 
 	/**
@@ -9,62 +9,94 @@
 	* Controller of the app
 	*/
 
-  	angular
+	angular
 		.module('shop')
 		.controller('ShopCtrl', shopCtrl);
 
-		shopCtrl.$inject = ['$scope', 'shopService'];
+	shopCtrl.$inject = ['$scope', 'shopService'];
 
-		/*
-		* recommend
-		* Using function declarations
-		* and bindable members up top.
-		*/
+	/*
+	* recommend
+	* Using function declarations
+	* and bindable members up top.
+	*/
 
-		function shopCtrl($scope, shopService) {
-			/*jshint validthis: true */
-			var vm = this;
-			vm.photos = [];
+	function shopCtrl($scope, shopService) {
+		/*jshint validthis: true */
+		var vm = this;
+		vm.photos = [];
+		vm.loginLink = "";
+		vm.token = "";
 
+		vm.error = null;
+
+		vm.resetError = function () {
 			vm.error = null;
-
-			vm.resetError = function() {
-				vm.error = null;
-			}
-
-			vm.getPhotos = function() {
-				console.log("Getting photo with token " + vm.token)
-				vm.resetError();
-
-				shopService
-					.getBuyablePhotos(`https://aureda.herokuapp.com/images?filter=buyable`, vm.token)
-					.then((data) => {
-						if (data.status === 0) {
-							vm.error = 'the data cannot be loaded';
-						} else if (data.status === 1) {
-							vm.photos = data.response.data;
-						}
-
-						$scope.$apply();
-					});
-			}
-
-			// https://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript
-			vm.code = function findGetParameter(parameterName) {
-				var result = null,
-					tmp = [];
-				location.search
-					.substr(1)
-					.split("&")
-					.forEach(function (item) {
-						tmp = item.split("=");
-						if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
-					});
-				return result;
-			}
-
-			vm.token = vm.getToken();
-
-			vm.getPhotos();
 		}
+
+		vm.getToken = function () {
+			vm.resetError();
+
+			console.log("Getting token from code " + findGetParameter("code"));
+
+			shopService
+				.postCode(`https://aureda.herokuapp.com/access_token`, findGetParameter("code"))
+				.then((data) => {
+					if (data.status === 0) {
+						vm.error = 'the token could not be get';
+					} else if (data.status === 1) {
+						vm.token = data.response.data;
+						vm.getPhotos();
+						console.log(vm.token);
+					}
+
+					$scope.$apply();
+				});
+		}
+
+		vm.getPhotos = function () {
+			vm.resetError();
+
+			shopService
+				.getBuyablePhotos(`https://aureda.herokuapp.com/images?filter=buyable`, vm.token)
+				.then((data) => {
+					if (data.status === 0) {
+						vm.error = 'Could not get MY photos';
+					} else if (data.status === 1) {
+						vm.photos = data.response.data;
+					}
+
+					$scope.$apply();
+				});
+		}
+
+		function makerandom() {
+			var text = "";
+			var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+			for (var i = 0; i < 30; i++)
+				text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+			return text;
+		}
+
+		// https://stackoverflow.com/questions/5448545/how-to-retrieve-get-parameters-from-javascript
+		function findGetParameter(parameterName) {
+			var result = null,
+				tmp = [];
+			location.search
+				.substr(1)
+				.split("&")
+				.forEach(function (item) {
+					tmp = item.split("=");
+					if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+				});
+			return result;
+		}
+
+		vm.getToken();
+		console.log(vm.token);
+
+		vm.getPhotos();
+	}
 })();
