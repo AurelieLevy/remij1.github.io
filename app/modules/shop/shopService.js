@@ -23,8 +23,8 @@
 			postCode: postCode,
 		};
 
-		const baseURL = "https://aureda.herokuapp.com/";
-		let token = "";
+		//const baseURL = "https://aureda.herokuapp.com/";
+		//let token = "";
 
 		function getPhotos(token, filter) {
 			urlString = baseURL + "images?filter=" + filter;
@@ -60,7 +60,7 @@
 			return getPhotos(token, "buyable");
 		}
 
-		function getMyPhotos(){
+		function getMyPhotos() {
 			return getPhotos(token, "owned");
 		}
 
@@ -83,7 +83,7 @@
 					// this callback will be called asynchronously
 					// when the response is available
 					token = response.data.access_token;
-					
+
 					resolve({
 						status: 1,
 						response,
