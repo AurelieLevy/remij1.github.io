@@ -39,6 +39,14 @@
 
 			console.log("Getting token from code " + findGetParameter("code"));
 
+			shopService.postCode(findGetParameter("code"))
+				.then(() => {
+					vm.token = data.response.data;
+					vm.getPhotos();
+					console.log(vm.token);
+				});
+
+			/*
 			shopService
 				.postCode(`https://aureda.herokuapp.com/access_token`, findGetParameter("code"))
 				.then((data) => {
@@ -51,7 +59,7 @@
 					}
 
 					$scope.$apply();
-				});
+				});//*/
 		}
 
 		vm.getPhotos = function () {

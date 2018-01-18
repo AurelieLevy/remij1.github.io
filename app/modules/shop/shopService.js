@@ -23,7 +23,11 @@
 			postCode: postCode,
 		};
 
-		function getBuyablePhotos(urlString, token) {
+		const baseURL = "https://aureda.herokuapp.com/";
+		let token = "";
+
+		function getPhotos(token, filter) {
+			urlString = baseURL + "images?filter=" + filter;
 			return new Promise((resolve) => {
 				console.log(`Fetching ${urlString}...`);
 
@@ -52,13 +56,22 @@
 			});
 		}
 
+		function getBuyablePhotos() {
+			return getPhotos(token, "buyable");
+		}
+
+		function getMyPhotos(){
+			return getPhotos(token, "owned");
+		}
+
 		function postCode(urlString, code) {
+			let urlString = baseURL + "access_token";
 			console.log("Posting code to aureda");
 			return new Promise((resolve) => {
 				console.log(`Fetching ${urlString}...`);
 
 				let body = {
-					"code" : code
+					"code": code
 				}
 
 				// Simple GET request example:
@@ -67,20 +80,22 @@
 					url: urlString,
 					data: JSON.stringify(body)
 				}).then(function successCallback(response) {
-						// this callback will be called asynchronously
-						// when the response is available
-						resolve({
-							status: 1, 
-							response,
-						});
-					}, function errorCallback(response) {
-						// called asynchronously if an error occurs
-						// or server returns response with an error status.
-						resolve({
-							status: 0, 
-							response,
-						});
+					// this callback will be called asynchronously
+					// when the response is available
+					token = response.data.access_token;
+					
+					resolve({
+						status: 1,
+						response,
 					});
+				}, function errorCallback(response) {
+					// called asynchronously if an error occurs
+					// or server returns response with an error status.
+					resolve({
+						status: 0,
+						response,
+					});
+				});
 			});
 		}
 	}
