@@ -91,6 +91,13 @@
 				});//*/
 		}
 
+		vm.buy = function(imageId){
+			shopService.buy(imageId)
+				.then(() =>{
+					$scope.$apply();
+				});
+		}
+
 		function makerandom() {
 			var text = "";
 			var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
