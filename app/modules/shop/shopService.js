@@ -64,7 +64,7 @@
 			return getPhotos(token, "owned");
 		}
 
-		function postCode(urlString, code) {
+		function postCode(code) {
 			let urlString = baseURL + "access_token";
 			console.log("Posting code to aureda");
 			return new Promise((resolve) => {
