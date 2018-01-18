@@ -40,7 +40,7 @@
 			console.log("Getting token from code " + findGetParameter("code"));
 
 			shopService.postCode(findGetParameter("code"))
-				.then(() => {
+				.then((data) => {
 					vm.token = data.response.data;
 					vm.getPhotos();
 					console.log(vm.token);
