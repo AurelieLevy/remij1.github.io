@@ -14,13 +14,13 @@
                 <p> My photos </p>
             </md-list-item>
             <md-list-item ng-repeat="item in vm.menu" ng-click="vm.navigateTo('home.' + item.link)">
-                <div class="inset" ng-show="item.icon">
+                <div class="inset" ng-show="item.icon" ng-click="reloadRoute()">
                     <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
                 </div>
                 <p > {{ item.name }}</p>
             </md-list-item>
             <md-divider></md-divider>
-            <md-subheader>{{ vm.getUserData().userName }}</md-subheader>
+            <md-subheader>{{ vm.getUserData.userName }}</md-subheader>
             <md-list-item ng-repeat="item in vm.admin" ng-click="vm.showSettingsBottom($event)" >
                 <div class="inset">
                     <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
