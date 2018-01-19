@@ -43,7 +43,6 @@
 				.then((data) => {
 					vm.token = data.response.data;
 					vm.getPhotos();
-					console.log(vm.token);
 
 					$scope.$apply();
 				});
@@ -123,7 +122,6 @@
 		}
 
 		vm.getToken();
-		console.log(vm.token);
 
 		vm.getPhotos();
 	}

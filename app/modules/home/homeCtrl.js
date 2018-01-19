@@ -48,7 +48,6 @@
 					vm.token = data.response.data;
 					vm.getPhotos();
 					vm.getUserData();
-					console.log(vm.token);
 
 					$scope.$apply();
 				});
@@ -78,6 +77,7 @@
 						vm.error = 'Could not get my data';
 					} else if (data.status === 1) {
 						vm.userData = data.response.data;
+						console.log(vm.userData);
 					}
 
 					$scope.$apply();
@@ -121,9 +121,6 @@
 		setLoginLink();
 
 		vm.getPhotos();
-
-		vm.getUserData();
-		console.log(vm.userData);
 	}
 
 })();
