@@ -4,7 +4,7 @@
             <div layout="column" class="md-toolbar-tools-bottom inset">
                 <div layout="row">
                     <div flex="80" style="margin-top: 10px;">
-                        <div>{{$rootScope.userData.userName}} with {{$rootScope.userData.gold}}</div>
+                        <div>{{vm.userData.userName}} with {{vm.userData.gold}}</div>
                     </div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                 <p > {{ item.name }}</p>
             </md-list-item>
             <md-divider></md-divider>
-            <md-subheader>Admin</md-subheader>
+            <md-subheader>{{vm.userData.userName}}</md-subheader>
             <md-list-item ng-repeat="item in vm.admin" ng-click="vm.showSettingsBottom($event)" >
                 <div class="inset">
                     <ng-md-icon icon="{{item.icon}}"></ng-md-icon>

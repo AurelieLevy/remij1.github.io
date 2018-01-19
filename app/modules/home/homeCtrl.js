@@ -77,7 +77,7 @@
 					if (data.status === 0) {
 						vm.error = 'Could not get my data';
 					} else if (data.status === 1) {
-						$rootScope.userData = data.response.data;
+						vm.userData = data.response.data;
 					}
 
 					$scope.$apply();
@@ -117,11 +117,12 @@
 		}
 
 		vm.getToken();
-		console.log(vm.token);
 
 		setLoginLink();
 
 		vm.getPhotos();
+
+		vm.getUserData();
 	}
 
 })();
