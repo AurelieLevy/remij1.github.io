@@ -82,6 +82,8 @@
 
 					$scope.$apply();
 				});
+
+			console.log(vm.userData);
 		}
 
 		function makerandom() {
