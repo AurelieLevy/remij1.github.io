@@ -78,13 +78,8 @@
 						vm.error = 'Could not get my data';
 					} else if (data.status === 1) {
 						return data.response.data;
-						console.log("1 " + vm.userData.userName);
 					}
-
-					$scope.$apply();
 				});	
-				
-			console.log("2 " + vm.userData.userName);
 		}
 
 		function makerandom() {
