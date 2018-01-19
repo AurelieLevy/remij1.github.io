@@ -71,6 +71,7 @@
 
 		vm.getUserData = function(){
 			vm.resetError();
+			console.log("Calling for userData")
 
 			shopService.getUserData()
 				.then((data) => {

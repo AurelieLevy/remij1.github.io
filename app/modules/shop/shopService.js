@@ -105,7 +105,7 @@
 			let urlString = baseURL + "user_info";
 			
 			return new Promise((resolve) => {
-				console.log(`Fetching ${urlString}...`);
+				console.log(`Fetching ${urlString} for userData...`);
 
 				// Simple GET request example:
 				$http({
