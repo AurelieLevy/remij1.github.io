@@ -82,7 +82,9 @@
 					}
 
 					$scope.$apply();
-				});			
+				});	
+				
+			console.log("2 " + vm.userData.userName);
 		}
 
 		function makerandom() {
@@ -122,9 +124,6 @@
 		setLoginLink();
 
 		vm.getPhotos();
-
-		vm.getUserData();
-		console.log("2 " + vm.userData.userName);
 	}
 
 })();
