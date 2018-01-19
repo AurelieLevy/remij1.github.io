@@ -13,7 +13,7 @@
 		.module('home')
 		.controller('HomeCtrl', Home);
 
-	Home.$inject = ['$route', '$scope', 'homeService', 'shopService'];
+	Home.$inject = ['$scope', 'homeService', 'shopService'];
 
 	/*
 	* recommend
@@ -118,10 +118,6 @@
 				});
 			return result;
 		}
-
-		$scope.reloadRoute = function() {
-			$route.reload();
-		 }
 
 		vm.getToken();
 
