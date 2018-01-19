@@ -71,7 +71,6 @@
 
 		vm.getUserData = function(){
 			vm.resetError();
-			console.log("Calling for userData")
 
 			shopService.getUserData()
 				.then((data) => {
@@ -79,6 +78,7 @@
 						vm.error = 'Could not get my data';
 					} else if (data.status === 1) {
 						vm.userData = data.response.data;
+						console.log(vm.userData);
 					}
 
 					$scope.$apply();
