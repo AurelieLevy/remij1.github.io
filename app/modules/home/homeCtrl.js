@@ -29,6 +29,7 @@
 		vm.token = "";
 
 		vm.error = null;
+		vm.userData = {}
 
 		vm.resetError = function () {
 			vm.error = null;
@@ -77,13 +78,11 @@
 						vm.error = 'Could not get my data';
 					} else if (data.status === 1) {
 						vm.userData = data.response.data;
-						console.log(vm.userData);
+						console.log("1 " + vm.userData.userName);
 					}
 
 					$scope.$apply();
-				});
-
-			console.log(vm.userData);
+				});			
 		}
 
 		function makerandom() {
@@ -123,6 +122,9 @@
 		setLoginLink();
 
 		vm.getPhotos();
+
+		vm.getUserData();
+		console.log("2 " + vm.userData.userName);
 	}
 
 })();
