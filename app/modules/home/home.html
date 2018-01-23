@@ -34,14 +34,13 @@
             <h3>{{vm.user.userName}} ({{vm.user.gold}} gold owned)</h3>
             <span flex></span>
 
-            <a href="{{vm.loginLink}}">
-                <md-menu-item>
-                    <md-button ng-click="layout.login()">
-                        <md-icon >power_settings_new</md-icon>
-                        Login
-                    </md-button>
-                </md-menu-item>
-            </a>
+            <md-menu-item>
+                <md-button ng-href="{{vm.loginLink}}">
+                    <md-icon>power_settings_new</md-icon>
+                    Login
+                </md-button>
+            </md-menu-item>
+
 
         </div>
     </md-toolbar>
