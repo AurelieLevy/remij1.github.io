@@ -4,7 +4,7 @@
             <div layout="column" class="md-toolbar-tools-bottom inset">
                 <div layout="row">
                     <div flex="80" style="margin-top: 10px;">
-                        <div>{{vm.userData.userName}} with {{vm.userData.gold}}</div>
+                        <div>ToDoProject</div>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
             <md-button ng-click="layout.toggleSidenav('left')" hide-gt-md aria-label="Menu">
                 <ng-md-icon icon="menu"></ng-md-icon>
             </md-button>
-            <h3>toDoProject</h3>
+            <h3>{{vm.userData.userName}} with {{vm.userData.gold}}</h3>
             <span flex></span>
             <md-button aria-label="Search" ng-click="showSearch = !showSearch">
                 <ng-md-icon icon="search"></ng-md-icon>
