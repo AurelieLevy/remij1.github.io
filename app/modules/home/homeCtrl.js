@@ -79,7 +79,6 @@
 						vm.error = 'Could not get my data';
 					} else if (data.status === 1) {
 						vm.user = data.response.data;
-						console.log("1 " + vm.userData.userName);
 					}
 
 					$scope.$apply();
