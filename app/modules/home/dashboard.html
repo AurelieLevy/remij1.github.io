@@ -20,3 +20,25 @@
         </md-card-content>
     </md-card>
 </div>
+
+<div class="md-padding" flex layout-sm="column">
+    <md-card class="text-center">
+        <md-card-content>
+            <div class="container">
+
+                <h1>You've succesfully completed these tasks !</h1>
+                            
+                <div class="tz-gallery">
+                    <div class="row">
+                        <div ng-repeat="x in vm.user.handledTasks">
+                            <div class="col-sm-6 col-md-4 lightbox">
+                                <h3>{{x.title}}</h2>
+                                <h2>gave you {{x.score}} gold !</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </md-card-content>
+    </md-card>
+</div>
