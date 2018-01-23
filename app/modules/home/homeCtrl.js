@@ -81,6 +81,8 @@
 						vm.user = data.response.data;
 						console.log("1 " + vm.userData.userName);
 					}
+
+					$scope.$apply();
 				});	
 			
 			return user;				
