@@ -78,7 +78,7 @@
 					if (data.status === 0) {
 						vm.error = 'Could not get my data';
 					} else if (data.status === 1) {
-						user = data.response.data;
+						vm.user = data.response.data;
 						console.log("1 " + vm.userData.userName);
 					}
 				});	
