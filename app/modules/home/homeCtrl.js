@@ -38,12 +38,6 @@
 		vm.getToken = function () {
 			vm.resetError();
 
-			console.log("Getting token from code " + findGetParameter("code"));
-
-			vm.resetError();
-
-			console.log("Getting token from code " + findGetParameter("code"));
-
 			shopService.postCode(findGetParameter("code"))
 				.then((data) => {
 					vm.token = data.response.data;
@@ -121,17 +115,25 @@
 
 		function connect() {
 			if (!shopService.isConnected()) {
-				$mdDialog.show(
-					$mdDialog.alert()
-						.parent(angular.element(document.querySelector('#popupContainer')))
-						.clickOutsideToClose(false)
-						.title('Connect to Wunderlist')
-						.textContent('This app needs you to be connected with Wunderlist to work properly. You will be now redirected to the login page.')
-						.ariaLabel('Alert Dialog Demo')
-						.ok('Login')
-				).then(() => {
-					$window.location.href = vm.loginLink;
-				});
+				// Checking if we have the code
+				let code = findGetParameter('code');
+
+				if (code == null) {
+					$mdDialog.show(
+						$mdDialog.alert()
+							.parent(angular.element(document.querySelector('#popupContainer')))
+							.clickOutsideToClose(false)
+							.title('Connect to Wunderlist')
+							.textContent('This app needs you to be connected with Wunderlist to work properly. You will be now redirected to the login page.')
+							.ariaLabel('Alert Dialog Demo')
+							.ok('Login')
+					).then(() => {
+						$window.location.href = vm.loginLink;
+					});
+				}else{
+					// We here have the code
+					vm.getToken();
+				}
 			}
 		}
 
