@@ -91,8 +91,12 @@
 
 		$scope.buy = function(imageId){
 			shopService.buy(imageId)
-				.then(() => vm.getPhotos());
+				.then(() => $rootScope.$broadcast('refreshUser'));
 		}
+
+		$scope.$on('refreshUser',  (event) => {
+			vm.getPhotos();
+		})
 
 		function makerandom() {
 			var text = "";
@@ -119,7 +123,5 @@
 		}
 
 		vm.getToken();
-
-		vm.getPhotos();
 	}
 })();

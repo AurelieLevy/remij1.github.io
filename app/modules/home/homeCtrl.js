@@ -69,7 +69,7 @@
 				});
 		}
 
-		vm.getUserData = function(){
+		vm.getUserData = function () {
 			vm.resetError();
 			const user = {};
 
@@ -82,9 +82,9 @@
 					}
 
 					$scope.$apply();
-				});	
-			
-			return user;				
+				});
+
+			return user;
 		}
 
 		function makerandom() {
@@ -119,11 +119,16 @@
 			return result;
 		}
 
-		vm.getToken();
+		$scope.$on('refreshUser', (event) => {
+			vm.getPhotos();
+			vm.getUserData();
+		})
 
 		setLoginLink();
 
-		vm.getPhotos();
+		vm.getToken();
+
+
 	}
 
 })();
