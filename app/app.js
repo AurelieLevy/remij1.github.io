@@ -17,8 +17,10 @@
 		 'ngMaterial',
 		'ngMdIcons',
 		'ngCookies',
+		'ngTouch',
 		'ui.router',
 		'home',
+		'login',
 		'shop',
 	]);
 

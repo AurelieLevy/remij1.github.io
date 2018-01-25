@@ -1,0 +1,21 @@
+{
+  "generator-angm": {
+    "appName": "todogame",
+    "angularCookies": true,
+    "angularAnimate": false,
+    "angularSanitize": false,
+    "angularBootstrap": true,
+    "angularMaterial": true,
+    "modules": [
+      {
+        "name": "login"
+      }
+    ],
+    "menu": [
+      {
+        "link": "login",
+        "title": "Login"
+      }
+    ]
+  }
+}
