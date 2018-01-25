@@ -19,6 +19,7 @@
 
 	const baseURL = "https://aureda.herokuapp.com/";
 	let token = "";
+	let user = null;
 
 	function shopService($http) {
 		return {
@@ -27,7 +28,8 @@
 			postCode: postCode,
 			buy:buy,
 			getUserData:getUserData,
-			isConnected:isConnected
+			isConnected:isConnected,
+			getUser:getUser
 		};
 
 
@@ -71,6 +73,10 @@
 
 		function getMyPhotos() {
 			return getPhotos(token, "owned");
+		}
+
+		function getUser(){
+			return user;
 		}
 
 		function buy(imageId){
@@ -122,6 +128,8 @@
 				}).then(function successCallback(response) {
 					// this callback will be called asynchronously
 					// when the response is available
+
+					user = data.response.data;
 
 					resolve({
 						status: 1,

@@ -44,7 +44,7 @@
 					vm.token = data.response.data;
 					vm.getPhotos();
 					vm.userData = vm.getUserData();
-					
+
 					$scope.$apply();
 				});
 
@@ -74,7 +74,7 @@
 					} else if (data.status === 1) {
 						// Adding if the user can buy this image or not
 						data.response.data.forEach((i) => {
-							i.disabled = vm.user.gold >= i.value;
+							i.disabled = shopService.getUser().gold >= i.value;
 						})
 
 						vm.photos = data.response.data;
