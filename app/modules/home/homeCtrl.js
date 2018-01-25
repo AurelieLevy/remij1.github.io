@@ -133,6 +133,9 @@
 				}else{
 					// We here have the code
 					vm.getToken();
+
+					// Clearing the code from the URL
+					$location.url($location.path());
 				}
 			}
 		}
@@ -142,7 +145,7 @@
 			vm.getUserData();
 		});
 
-		//setLoginLink();
+		setLoginLink();
 
 		connect();
 
