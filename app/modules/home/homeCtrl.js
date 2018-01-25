@@ -13,7 +13,7 @@
 		.module('home')
 		.controller('HomeCtrl', Home);
 
-	Home.$inject = ['$scope', 'homeService', 'shopService'];
+	Home.$inject = ['$scope', 'homeService', 'shopService', '$mdDialog', '$window'];
 
 	/*
 	* recommend
@@ -21,7 +21,7 @@
 	* and bindable members up top.
 	*/
 
-	function Home($scope, homeService, shopService) {
+	function Home($scope, homeService, shopService, $mdDialog, $window) {
 		/*jshint validthis: true */
 		var vm = this;
 		vm.photos = [];
@@ -119,12 +119,30 @@
 			return result;
 		}
 
+		function connect() {
+			if (!shopService.isConnected()) {
+				$mdDialog.show(
+					$mdDialog.alert()
+						.parent(angular.element(document.querySelector('#popupContainer')))
+						.clickOutsideToClose(false)
+						.title('Connect to Wunderlist')
+						.textContent('This app needs you to be connected with Wunderlist to work properly. You will be now redirected to the login page.')
+						.ariaLabel('Alert Dialog Demo')
+						.ok('Login')
+				).then(() => {
+					$window.location.href = vm.loginLink;
+				});
+			}
+		}
+
 		$scope.$on('refreshUser', (event) => {
 			vm.getPhotos();
 			vm.getUserData();
 		});
 
 		setLoginLink();
+
+		connect();
 
 		vm.getToken();
 

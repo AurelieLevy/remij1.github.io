@@ -26,7 +26,8 @@
 			getMyPhotos: getMyPhotos,
 			postCode: postCode,
 			buy:buy,
-			getUserData:getUserData
+			getUserData:getUserData,
+			isConnected:isConnected
 		};
 
 
@@ -58,6 +59,10 @@
 					});
 				});
 			});
+		}
+
+		function isConnected(){
+			return token.length > 0;
 		}
 
 		function getBuyablePhotos() {
