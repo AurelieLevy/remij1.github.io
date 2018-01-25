@@ -129,7 +129,7 @@
 					// this callback will be called asynchronously
 					// when the response is available
 
-					user = data.response.data;
+					user = response.data;
 
 					resolve({
 						status: 1,
