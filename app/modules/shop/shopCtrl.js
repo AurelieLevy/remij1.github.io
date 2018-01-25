@@ -70,6 +70,11 @@
 					if (data.status === 0) {
 						vm.error = 'Could not get MY photos';
 					} else if (data.status === 1) {
+						// Adding if the user can buy this image or not
+						data.response.data.forEach((i) => {
+							i.disabled = vm.user.gold >= i.value;
+						})
+
 						vm.photos = data.response.data;
 					}
 

@@ -133,9 +133,6 @@
 				}else{
 					// We here have the code
 					vm.getToken();
-
-					// Clearing the code from the URL
-					$location.search('code', null);
 				}
 			}
 		}
