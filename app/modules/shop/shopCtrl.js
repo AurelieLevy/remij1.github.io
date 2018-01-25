@@ -43,6 +43,8 @@
 				.then((data) => {
 					vm.token = data.response.data;
 					vm.getPhotos();
+					vm.userData = vm.getUserData();
+					
 					$scope.$apply();
 				});
 
@@ -116,8 +118,27 @@
 
 		}
 
+		vm.getUserData = function () {
+			vm.resetError();
+			const user = {};
+
+			shopService.getUserData()
+				.then((data) => {
+					if (data.status === 0) {
+						vm.error = 'Could not get my data';
+					} else if (data.status === 1) {
+						vm.user = data.response.data;
+					}
+
+					$scope.$apply();
+				});
+
+			return user;
+		}
+
 		$scope.$on('refreshUser', (event) => {
 			vm.getPhotos();
+			vm.getUserData();
 		});
 
 		function makerandom() {
