@@ -75,8 +75,17 @@
 
 			shopService.getBuyablePhotos()
 				.then((photos) => {
-					vm.photos = photos;
-					$scope.$apply();
+					// Dealing with the unbuyable images
+
+					shopService.getUser().then((u) => {
+						photos.forEach((i) => {
+							i.disabled = i.value > u.gold;
+						});
+
+						vm.photos = photos;
+						$scope.$apply();
+					});
+
 				});
 			/*
 			shopService
