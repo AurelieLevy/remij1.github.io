@@ -20,7 +20,6 @@
 		'ngTouch',
 		'ui.router',
 		'home',
-		'login',
 		'shop',
 	]);
 
