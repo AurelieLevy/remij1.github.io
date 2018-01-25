@@ -89,12 +89,29 @@
 				});//*/
 		}
 
-		$scope.buy = function(imageId){
-			shopService.buy(imageId)
-				.then(() => $rootScope.$broadcast('refreshUser'));
+		$scope.buy = function (imageId, value) {
+
+			// Confirming buying
+			$mdDialog.show(
+				$mdDialog.prompt()
+					.title('Do you really want to buy it for ' + value + ' gold?')
+					.textContent('Is it worth it ?')
+					.ariaLabel('Lucky day')
+					.ok('Yes please, I like this image sooo much!')
+					.cancel('No way...')
+			).then(() => {
+				// The user bought it
+				shopService.buy(imageId)
+					.then(() => $rootScope.$broadcast('refreshUser'));
+			}, () => {
+				// The user didn't buy it, we do not have to do anything
+			});
+
+
+
 		}
 
-		$scope.$on('refreshUser',  (event) => {
+		$scope.$on('refreshUser', (event) => {
 			vm.getPhotos();
 		});
 
