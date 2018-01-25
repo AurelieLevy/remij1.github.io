@@ -20,11 +20,6 @@
 		function Menu ($http) {
 
 			var menu = [
-				
-					{
-						link: 'login',
-							name: 'Login'
-					},
 
 					{
 						link: 'shop',

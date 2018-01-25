@@ -22,10 +22,6 @@
 			var menu = [
 				
 					{
-						link: 'login',
-							name: 'Login'
-					},
-					{
 						link: 'shop',
 							name: 'Shop'
 					},
