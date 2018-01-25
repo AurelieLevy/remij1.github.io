@@ -26,7 +26,7 @@
 		var vm = this;
 		vm.photos = [];
 		vm.loginLink = "";
-		vm.token = "";
+		//vm.token = "";
 
 		vm.error = null;
 		vm.userData = {}
@@ -35,6 +35,16 @@
 			vm.error = null;
 		}
 
+		vm.initUser = function () {
+			shopService.init(findGetParameter("code"));
+		}
+
+		function refresh() {
+			getPhotos();
+			getUserData();
+		}
+
+		/*
 		vm.getToken = function () {
 			vm.resetError();
 
@@ -46,8 +56,20 @@
 
 					$scope.$apply();
 				});
+		}*/
+
+
+		function getPhotos() {
+			vm.resetError();
+
+			shopService.getMyPhotos()
+				.then((photos) => {
+					vm.photos = photos;
+					$scope.$apply();
+				});
 		}
 
+		/*
 		vm.getPhotos = function () {
 			vm.resetError();
 
@@ -61,8 +83,9 @@
 
 					$scope.$apply();
 				});
-		}
+		}//*/
 
+		/*
 		vm.getUserData = function () {
 			vm.resetError();
 			const user = {};
@@ -79,7 +102,21 @@
 				});
 
 			return user;
+		}*/
+
+		function getUserData() {
+			vm.resetError();
+
+			shopService.getUser()
+				.then((user) => {
+					vm.user = user;
+					$scope.$apply();
+				});
 		}
+
+		$scope.$on('refreshUser', (event) => {
+			refresh();
+		});
 
 		function makerandom() {
 			var text = "";
@@ -130,9 +167,12 @@
 					).then(() => {
 						$window.location.href = vm.loginLink;
 					});
-				}else{
+				} else {
 					// We here have the code
-					vm.getToken();
+					shopService.connect(code)
+						.then(() => {
+							refresh();
+						});
 
 					// Clearing the code from the URL
 					// $location.url($location.path());
@@ -140,17 +180,9 @@
 			}
 		}
 
-		$scope.$on('refreshUser', (event) => {
-			vm.getPhotos();
-			vm.getUserData();
-		});
-
 		setLoginLink();
 
 		connect();
-
-		vm.getToken();
-
 
 	}
 

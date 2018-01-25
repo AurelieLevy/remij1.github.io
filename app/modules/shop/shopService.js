@@ -18,20 +18,30 @@
 	shopService.$inject = ['$http'];
 
 	const baseURL = "https://aureda.herokuapp.com/";
-	let token = "";
+
+	// Saving everythings locally
+
+	let token = null;
 	let user = null;
+	let myImages = null;
+	let buyableImages = null;
 
 	function shopService($http) {
 		return {
 			getBuyablePhotos: getBuyablePhotos,
 			getMyPhotos: getMyPhotos,
-			postCode: postCode,
-			buy:buy,
-			getUserData:getUserData,
-			isConnected:isConnected,
-			getUser:getUser
+			buy: buy,
+			isConnected: isConnected,
+			getUser: getUser,
+			connect: connect
 		};
 
+		function connect(code) {
+			if (token == null)
+				return postCode(code);
+
+			return new Promise(function(){});
+		}
 
 		function getPhotos(token, filter) {
 			let urlString = baseURL + "images?filter=" + filter;
@@ -63,25 +73,54 @@
 			});
 		}
 
-		function isConnected(){
-			return token.length > 0;
+		function isConnected() {
+			return user != null;
 		}
 
 		function getBuyablePhotos() {
-			return getPhotos(token, "buyable");
+			if (buyableImages == null) {
+				return getPhotos(token, "buyable")
+					.then((data) => {
+						buyableImages = data.response.data;
+						return buyableImages;
+					});
+			} else {
+				return new Promise((resolve) => {
+					resolve(buyableImages);
+				});
+			}
 		}
 
 		function getMyPhotos() {
-			return getPhotos(token, "owned");
+			if (myImages == null) {
+				return getPhotos(token, "owned")
+					.then((data) => {
+						myImages = data.response.data;
+						return myImages;
+					});
+			} else {
+				return new Promise((resolve) => {
+					resolve(myImages);
+				});
+			}
 		}
 
-		function getUser(){
-			return user;
+		function getUser() {
+			if (user == null) {
+				return getUserData()
+					.then(() => {
+						return user;
+					})
+			} else {
+				return new Promise((resolve) => {
+					resolve(user)
+				});
+			}
 		}
 
-		function buy(imageId){
+		function buy(imageId) {
 			let urlString = baseURL + "images/" + imageId;
-			
+
 			return new Promise((resolve) => {
 				console.log(`Fetching ${urlString}...`);
 
@@ -108,13 +147,18 @@
 						response,
 					});
 				});
+			}).then((response) => {
+				// User info has changed, need to be refresh
+				user = null;
+				myImages = null;
+				buyableImages = null;
 			});
-			
+
 		}
 
-		function getUserData(){
+		function getUserData() {
 			let urlString = baseURL + "user_info";
-			
+
 			return new Promise((resolve) => {
 				console.log(`Fetching ${urlString} for userData...`);
 
@@ -167,15 +211,13 @@
 					token = response.data.access_token;
 
 					resolve({
-						status: 1,
-						response,
+						status: 1
 					});
 				}, function errorCallback(response) {
 					// called asynchronously if an error occurs
 					// or server returns response with an error status.
 					resolve({
-						status: 0,
-						response,
+						status: 0
 					});
 				});
 			});

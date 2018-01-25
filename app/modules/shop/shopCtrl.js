@@ -26,7 +26,7 @@
 		var vm = this;
 		vm.photos = [];
 		vm.loginLink = "";
-		vm.token = "";
+		//vm.token = "";
 
 		vm.error = null;
 
@@ -34,6 +34,12 @@
 			vm.error = null;
 		}
 
+		function refresh() {
+			getPhotos();
+			getUserData();
+		}
+
+		/*
 		vm.getToken = function () {
 			vm.resetError();
 
@@ -46,7 +52,7 @@
 					vm.userData = vm.getUserData();
 
 					$scope.$apply();
-				});
+				});//
 
 			/*
 			shopService
@@ -62,24 +68,14 @@
 
 					$scope.$apply();
 				});//*/
-		}
 
-		vm.getPhotos = function () {
+
+		function getPhotos() {
 			vm.resetError();
 
 			shopService.getBuyablePhotos()
-				.then((data) => {
-					if (data.status === 0) {
-						vm.error = 'Could not get MY photos';
-					} else if (data.status === 1) {
-						// Adding if the user can buy this image or not
-						data.response.data.forEach((i) => {
-							i.disabled = shopService.getUser().gold < i.value;
-						})
-
-						vm.photos = data.response.data;
-					}
-
+				.then((photos) => {
+					vm.photos = photos;
 					$scope.$apply();
 				});
 			/*
@@ -91,7 +87,7 @@
 					} else if (data.status === 1) {
 						vm.photos = data.response.data;
 					}
-
+	
 					$scope.$apply();
 				});//*/
 		}
@@ -118,27 +114,18 @@
 
 		}
 
-		vm.getUserData = function () {
+		function getUserData() {
 			vm.resetError();
-			const user = {};
 
-			shopService.getUserData()
-				.then((data) => {
-					if (data.status === 0) {
-						vm.error = 'Could not get my data';
-					} else if (data.status === 1) {
-						vm.user = data.response.data;
-					}
-
+			shopService.getUser()
+				.then((user) => {
+					vm.user = user;
 					$scope.$apply();
 				});
-
-			return user;
 		}
 
 		$scope.$on('refreshUser', (event) => {
-			vm.getPhotos();
-			vm.getUserData();
+			refresh();
 		});
 
 		function makerandom() {
@@ -165,6 +152,8 @@
 			return result;
 		}
 
-		vm.getToken();
+		refresh();
+
+		//vm.getToken();
 	}
 })();
