@@ -13,7 +13,7 @@
 		.module('shop')
 		.controller('ShopCtrl', shopCtrl);
 
-	shopCtrl.$inject = ['$scope', '$rootScope', 'shopService'];
+	shopCtrl.$inject = ['$scope', '$rootScope', 'shopService', '$mdDialog'];
 
 	/*
 	* recommend
@@ -21,7 +21,7 @@
 	* and bindable members up top.
 	*/
 
-	function shopCtrl($scope, $rootScope, shopService) {
+	function shopCtrl($scope, $rootScope, shopService, $mdDialog) {
 		/*jshint validthis: true */
 		var vm = this;
 		vm.photos = [];
@@ -74,7 +74,7 @@
 					} else if (data.status === 1) {
 						// Adding if the user can buy this image or not
 						data.response.data.forEach((i) => {
-							i.disabled = shopService.getUser().gold >= i.value;
+							i.disabled = shopService.getUser().gold < i.value;
 						})
 
 						vm.photos = data.response.data;
@@ -100,11 +100,11 @@
 
 			// Confirming buying
 			$mdDialog.show(
-				$mdDialog.prompt()
+				$mdDialog.confirm()
 					.title('Do you really want to buy it for ' + value + ' gold?')
 					.textContent('Is it worth it ?')
 					.ariaLabel('Lucky day')
-					.ok('Yes please, I like this image sooo much!')
+					.ok('Yes, I like this image sooo much!')
 					.cancel('No way...')
 			).then(() => {
 				// The user bought it
