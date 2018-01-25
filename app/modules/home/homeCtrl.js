@@ -13,7 +13,7 @@
 		.module('home')
 		.controller('HomeCtrl', Home);
 
-	Home.$inject = ['$scope', 'homeService', 'shopService', '$mdDialog', '$window'];
+	Home.$inject = ['$scope', 'homeService', 'shopService', '$mdDialog', '$window', '$location'];
 
 	/*
 	* recommend
@@ -21,7 +21,7 @@
 	* and bindable members up top.
 	*/
 
-	function Home($scope, homeService, shopService, $mdDialog, $window) {
+	function Home($scope, homeService, shopService, $mdDialog, $window, $location) {
 		/*jshint validthis: true */
 		var vm = this;
 		vm.photos = [];
@@ -133,6 +133,9 @@
 				}else{
 					// We here have the code
 					vm.getToken();
+
+					// Clearing the code from the URL
+					$location.url($location.path());
 				}
 			}
 		}
@@ -142,7 +145,7 @@
 			vm.getUserData();
 		});
 
-		setLoginLink();
+		//setLoginLink();
 
 		connect();
 
