@@ -96,7 +96,7 @@
 
 		$scope.$on('refreshUser',  (event) => {
 			vm.getPhotos();
-		})
+		});
 
 		function makerandom() {
 			var text = "";

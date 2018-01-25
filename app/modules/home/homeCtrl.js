@@ -122,7 +122,7 @@
 		$scope.$on('refreshUser', (event) => {
 			vm.getPhotos();
 			vm.getUserData();
-		})
+		});
 
 		setLoginLink();
 
