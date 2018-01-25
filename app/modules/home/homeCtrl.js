@@ -135,7 +135,7 @@
 					vm.getToken();
 
 					// Clearing the code from the URL
-					$location.url($location.path());
+					// $location.url($location.path());
 				}
 			}
 		}
