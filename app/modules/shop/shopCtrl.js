@@ -13,7 +13,7 @@
 		.module('shop')
 		.controller('ShopCtrl', shopCtrl);
 
-	shopCtrl.$inject = ['$scope', 'shopService'];
+	shopCtrl.$inject = ['$scope', '$rootScope', 'shopService'];
 
 	/*
 	* recommend
@@ -21,7 +21,7 @@
 	* and bindable members up top.
 	*/
 
-	function shopCtrl($scope, shopService) {
+	function shopCtrl($scope, $rootScope, shopService) {
 		/*jshint validthis: true */
 		var vm = this;
 		vm.photos = [];
@@ -43,7 +43,6 @@
 				.then((data) => {
 					vm.token = data.response.data;
 					vm.getPhotos();
-
 					$scope.$apply();
 				});
 
@@ -92,9 +91,7 @@
 
 		$scope.buy = function(imageId){
 			shopService.buy(imageId)
-				.then(() =>{
-					$scope.$apply();
-				});
+				.then(() => vm.getPhotos());
 		}
 
 		function makerandom() {
